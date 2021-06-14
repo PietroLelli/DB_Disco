@@ -9,7 +9,14 @@ public class Cliente {
 	private String Email;
 	private String Telefono;
 	private int IdLocale;
+	private int nClienti;
 	
+	public int getnClienti() {
+		return nClienti;
+	}
+	public void setnClienti(int nClienti) {
+		this.nClienti = nClienti;
+	}
 	public Cliente() {
 		
 	}

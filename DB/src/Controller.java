@@ -15,6 +15,7 @@ public class Controller {
         dataSource = new DBconnection();
     }
     
+    int countClienti=0;
     public List<Dipendente> findAllDipendenti()  {
         List<Dipendente> dipendenti = null;
         Dipendente dipendente = null;
@@ -81,6 +82,7 @@ public class Controller {
         Connection connection = this.dataSource.getMySQLConnection();
         PreparedStatement statement = null;
         String query = "select * from Cliente";
+        countClienti=0;
         try {
             statement = connection.prepareStatement(query);
             ResultSet result = statement.executeQuery();
@@ -107,7 +109,7 @@ public class Controller {
                 cliente.setEmail(result.getString("email"));
                 cliente.setTelefono(result.getString("telefono"));
                 cliente.setIdLocale(result.getInt("IdLocale"));
-                
+                countClienti++;
                 clienti.add(cliente);
             }
         }
@@ -126,6 +128,7 @@ public class Controller {
 	             System.out.println("Errore"+ e.getMessage());
             }
         }
+        
         return clienti;
     }   
     
@@ -431,6 +434,9 @@ public class Controller {
  	            System.out.println("Errore"+ e.getMessage());
              }
          }
-     }
-    
+     }    
+	
+	public int countClienti() {
+		return countClienti+1;
+	}
 }

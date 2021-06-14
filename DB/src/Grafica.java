@@ -72,6 +72,8 @@ public class Grafica {
 	private JScrollPane scrollPane_4;
 	private JTextField txtIdlocale_2;
 
+	int nClienti=0;
+	private JTextField textNumClienti;
 	/**
 	 * Launch the application.
 	 */
@@ -269,6 +271,7 @@ public class Grafica {
 		txtGenereMusicale.setText("Genere Musicale");
 		txtGenereMusicale.setColumns(10);
 		
+		
 		JLabel lblNewLabel_1 = new JLabel("Ospite");
 		
 		JButton btnNewButton_1 = new JButton("Aggiungi Concerto");
@@ -392,8 +395,12 @@ public class Grafica {
 		
 		JButton btnClienti = new JButton("Visualizza Clienti");
 		btnClienti.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
+				
 				List<Cliente> clienti = controller.findAllClienti();
+				nClienti= controller.countClienti();
+				textNumClienti.setText(Integer.toString(nClienti));
 				DefaultTableModel model = (DefaultTableModel) tableClienti.getModel();
 				model.setRowCount(0);
 				clienti.forEach(d ->{
@@ -401,6 +408,7 @@ public class Grafica {
 							d.getCF(), d.getNome(), d.getCognome(), d.getDataNascita(), d.getEmail(), d.getTelefono(), d.getIdLocale()
 					});
 				});
+				
 			}
 		});
 		
@@ -451,7 +459,7 @@ public class Grafica {
 		txtDataDiNascita.setText("Data di Nascita");
 		txtDataDiNascita.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("N\u00B0 Clienti :");
+		JLabel lblNumClienti = new JLabel("N\u00B0 Clienti :");
 		
 		scrollPane_1 = new JScrollPane();
 		
@@ -460,41 +468,39 @@ public class Grafica {
 		txtIdlocale_1.setHorizontalAlignment(SwingConstants.CENTER);
 		txtIdlocale_1.setColumns(10);
 		
-		JLabel lblNClienti = new JLabel("");
-		lblNClienti.setHorizontalAlignment(SwingConstants.CENTER);
+		textNumClienti = new JTextField();
+		textNumClienti.setText("0");
+		textNumClienti.setColumns(10);
 		GroupLayout gl_panelClienti = new GroupLayout(panelClienti);
 		gl_panelClienti.setHorizontalGroup(
 			gl_panelClienti.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panelClienti.createSequentialGroup()
 					.addGroup(gl_panelClienti.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panelClienti.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_panelClienti.createSequentialGroup()
-								.addContainerGap()
-								.addGroup(gl_panelClienti.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_panelClienti.createSequentialGroup()
-										.addGap(11)
-										.addComponent(btnRegistraCliente, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
-										.addGap(32))
-									.addGroup(gl_panelClienti.createSequentialGroup()
-										.addGroup(gl_panelClienti.createParallelGroup(Alignment.TRAILING)
-											.addComponent(txtNome_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-											.addComponent(txtDataDiNascita, Alignment.LEADING, 124, 124, Short.MAX_VALUE)
-											.addComponent(txtTelefono, Alignment.LEADING, 124, 124, Short.MAX_VALUE)
-											.addComponent(txtEmail, Alignment.LEADING, 124, 124, Short.MAX_VALUE)
-											.addComponent(txtCf, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-											.addComponent(btnClienti, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-											.addComponent(txtCognome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-											.addComponent(txtIdlocale_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE))
-										.addGap(11))))
-							.addGroup(gl_panelClienti.createSequentialGroup()
-								.addGap(47)
-								.addComponent(lblNClienti)
-								.addGap(103)))
+						.addGroup(gl_panelClienti.createSequentialGroup()
+							.addContainerGap()
+							.addGroup(gl_panelClienti.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panelClienti.createSequentialGroup()
+									.addGap(11)
+									.addComponent(btnRegistraCliente, GroupLayout.PREFERRED_SIZE, 83, GroupLayout.PREFERRED_SIZE)
+									.addGap(32))
+								.addGroup(gl_panelClienti.createSequentialGroup()
+									.addGroup(gl_panelClienti.createParallelGroup(Alignment.TRAILING)
+										.addComponent(txtNome_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+										.addComponent(txtDataDiNascita, Alignment.LEADING, 124, 129, Short.MAX_VALUE)
+										.addComponent(txtTelefono, Alignment.LEADING, 124, 129, Short.MAX_VALUE)
+										.addComponent(txtEmail, Alignment.LEADING, 124, 129, Short.MAX_VALUE)
+										.addComponent(txtCf, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+										.addComponent(btnClienti, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+										.addComponent(txtCognome, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+										.addComponent(txtIdlocale_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+									.addGap(11))))
 						.addGroup(gl_panelClienti.createSequentialGroup()
 							.addGap(27)
-							.addComponent(lblNewLabel)
+							.addComponent(lblNumClienti)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textNumClienti, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		gl_panelClienti.setVerticalGroup(
@@ -521,10 +527,10 @@ public class Grafica {
 							.addComponent(txtIdlocale_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(27)
 							.addComponent(btnRegistraCliente)
-							.addPreferredGap(ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-							.addComponent(lblNClienti)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+							.addGroup(gl_panelClienti.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblNumClienti)
+								.addComponent(textNumClienti, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addGap(24)
 							.addComponent(btnClienti)))
 					.addContainerGap())
